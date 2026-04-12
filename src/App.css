@@ -1,0 +1,215 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  overflow: hidden;
+}
+
+/* CENTER WRAPPER */
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* GLASS MORPHISM CARD */
+.card {
+  width: 440px;
+  max-width: 95%;
+  height: 680px;
+  background: rgba(17, 25, 40, 0.75);
+  backdrop-filter: blur(18px);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* HEADINGS */
+h2 {
+  color: #f1f5f9;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+}
+
+p {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+/* INPUTS (GLASS STYLE) */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 7px 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.05);
+  color: white;
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus {
+  border: 1px solid #00d9a6;
+  box-shadow: 0 0 10px rgba(0, 217, 166, 0.3);
+}
+
+input::placeholder {
+  color: #64748b;
+}
+
+/* BUTTONS (NEON STYLE) */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #00d9a6, #2563eb);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 217, 166, 0.4);
+}
+
+/* SWITCH TEXT */
+p {
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* TOP BAR */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+}
+
+/* LEAVE BUTTON (DANGER STYLE) */
+.leaveBtn {
+  width: auto;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+.leaveBtn:hover {
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+/* CHAT BOX */
+.chat-box {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background:
+    radial-gradient(circle at top, rgba(0, 217, 166, 0.05), transparent 40%),
+    radial-gradient(circle at bottom, rgba(37, 99, 235, 0.05), transparent 40%);
+}
+
+/* MESSAGE BUBBLES */
+.message {
+  max-width: 72%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  word-wrap: break-word;
+  position: relative;
+  animation: pop 0.2s ease;
+}
+
+/* MESSAGE ANIMATION */
+@keyframes pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* SELF MESSAGE (GREEN GLOW) */
+.self {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #00d9a6, #059669);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 5px 15px rgba(0, 217, 166, 0.2);
+}
+
+/* OTHER MESSAGE (DARK CARD) */
+.other {
+  align-self: flex-start;
+  background: rgba(255,255,255,0.06);
+  color: #e2e8f0;
+  border-bottom-left-radius: 4px;
+}
+
+/* INPUT AREA */
+.inputBox {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(255,255,255,0.04);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.inputBox input {
+  flex: 1;
+  margin: 0;
+}
+
+.inputBox button {
+  width: 80px;
+  margin: 0;
+}
+
+/* SCROLLBAR BEAUTY */
+.chat-box::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background: linear-gradient(#00d9a6, #2563eb);
+  border-radius: 10px;
+}
