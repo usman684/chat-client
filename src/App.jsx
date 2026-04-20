@@ -43,7 +43,6 @@ function App() {
 
     socket.on("message", (msg) => {
       console.log("RECEIVED:", msg);
-
       setChat((prev) => [...prev, { ...msg, self: false }]);
     });
 
