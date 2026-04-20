@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import "./App.css";
 
 function App() {
-  const [socket, setSocket] = useState(null);
+  const socketRef = useRef(null);
 
   // AUTH
   const [user, setUser] = useState(null);
@@ -26,39 +26,39 @@ function App() {
   const [room, setRoom] = useState("");
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
-  const [receiver, setReceiver] = useState("");
 
-  // 💾 AUTO LOGIN ON START
+  // ================= SOCKET =================
   useEffect(() => {
     const savedUser = JSON.parse(localStorage.getItem("user"));
     const savedRoom = localStorage.getItem("room");
 
-    const newSocket = io("http://localhost:8080");
-    setSocket(newSocket);
+    const socket = io("https://chat-server-production-aea7.up.railway.app");
+    socketRef.current = socket;
 
-    if (savedUser) {
-      setUser(savedUser);
+    socket.on("connect", () => {
+      console.log("Socket Connected:", socket.id);
 
-      // auto rejoin room
       if (savedRoom) {
-        setRoom(savedRoom);
-        setJoined(true);
-        newSocket.emit("join", savedRoom);
-      }
-    }
-
-    newSocket.on("message", (msg) => {
-      setChat((prev) => [...prev, { ...msg, self: false }]);
-
-      if (msg.name && msg.name !== savedUser?.name) {
-        setReceiver(msg.name);
+        socket.emit("join", savedRoom);
       }
     });
 
-    return () => newSocket.disconnect();
+    socket.on("message", (msg) => {
+      console.log("Received:", msg);
+
+      setChat((prev) => [...prev, { ...msg, self: false }]);
+    });
+
+    if (savedUser) {
+      setUser(savedUser);
+      setRoom(savedRoom || "");
+      setJoined(!!savedRoom);
+    }
+
+    return () => socket.disconnect();
   }, []);
 
-  // 🔐 SIGNUP
+  // ================= SIGNUP =================
   const signup = () => {
     const { firstName, lastName, room, password } = authData;
 
@@ -80,11 +80,11 @@ function App() {
     users.push(authData);
     localStorage.setItem("users", JSON.stringify(users));
 
-    alert("Signup successful! Now login");
+    alert("Signup successful");
     setIsSignup(false);
   };
 
-  // 🔑 LOGIN + 💾 SAVE SESSION
+  // ================= LOGIN =================
   const login = () => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -103,21 +103,19 @@ function App() {
 
     setUser(sessionUser);
 
-    // 💾 SAVE SESSION
     localStorage.setItem("user", JSON.stringify(sessionUser));
     localStorage.setItem("room", found.room);
   };
 
-  // JOIN ROOM
+  // ================= JOIN ROOM =================
   const joinRoom = () => {
-    socket.emit("join", user.room);
+    socketRef.current.emit("join", user.room);
+
     setRoom(user.room);
     setJoined(true);
-
-    localStorage.setItem("room", user.room);
   };
 
-  // SEND MESSAGE
+  // ================= SEND MESSAGE =================
   const sendMessage = () => {
     if (!message) return;
 
@@ -127,45 +125,34 @@ function App() {
       text: message
     };
 
-    socket.emit("send", msgData);
+    socketRef.current.emit("send", msgData);
+
     setChat((prev) => [...prev, { ...msgData, self: true }]);
     setMessage("");
   };
 
-  // 🔓 LOGOUT (FULL RESET)
+  // ================= LEAVE =================
+  const leaveRoom = () => {
+    socketRef.current.emit("leave", room);
+
+    setJoined(false);
+    setRoom("");
+    setChat([]);
+  };
+
   const logout = () => {
-    const confirmLogout = window.confirm("Do you want to logout?");
-
-    if (!confirmLogout) return;
-
-    socket.emit("leave", room);
+    socketRef.current.emit("leave", room);
 
     setUser(null);
     setJoined(false);
     setRoom("");
     setChat([]);
-    setReceiver("");
 
     localStorage.removeItem("user");
     localStorage.removeItem("room");
   };
 
-  // LEAVE ROOM (only room exit, NOT logout)
-  const leaveRoom = () => {
-    const confirmLeave = window.confirm("Leave this room?");
-
-    if (!confirmLeave) return;
-
-    socket.emit("leave", room);
-    setJoined(false);
-    setChat([]);
-    setRoom("");
-    setReceiver("");
-
-    localStorage.removeItem("room");
-  };
-
-  // 🔐 AUTH SCREEN
+  // ================= AUTH SCREEN =================
   if (!user) {
     return (
       <div className="container">
@@ -225,10 +212,7 @@ function App() {
             </>
           )}
 
-          <p
-            style={{ cursor: "pointer", color: "blue" }}
-            onClick={() => setIsSignup(!isSignup)}
-          >
+          <p onClick={() => setIsSignup(!isSignup)} style={{ cursor: "pointer", color: "blue" }}>
             {isSignup ? "Login" : "Create account"}
           </p>
         </div>
@@ -236,7 +220,7 @@ function App() {
     );
   }
 
-  // 🔵 JOIN SCREEN
+  // ================= JOIN SCREEN =================
   if (!joined) {
     return (
       <div className="container">
@@ -245,11 +229,7 @@ function App() {
           <p>Welcome, <b>{user.name}</b></p>
 
           <button onClick={joinRoom}>Join Room {user.room}</button>
-
-          <button
-            onClick={logout}
-            style={{ background: "red", marginTop: "10px" }}
-          >
+          <button onClick={logout} style={{ background: "red" }}>
             Logout
           </button>
         </div>
@@ -257,31 +237,26 @@ function App() {
     );
   }
 
-  // 💬 CHAT SCREEN
+  // ================= CHAT =================
   return (
     <div className="container">
       <div className="card">
 
         <div className="topbar">
           <div>
-            <h2>💬 Chat Room</h2>
+            <h2>💬 Chat</h2>
             <p>
               Room: <b>{room}</b><br />
-              You: <b>{user.name}</b>
+              User: <b>{user.name}</b>
             </p>
           </div>
 
-          <button className="leaveBtn" onClick={leaveRoom}>
-            Leave Room
-          </button>
+          <button onClick={leaveRoom}>Leave</button>
         </div>
 
         <div className="chat-box">
           {chat.map((msg, i) => (
-            <div
-              key={i}
-              className={`message ${msg.self ? "self" : "other"}`}
-            >
+            <div key={i} className={msg.self ? "self" : "other"}>
               <strong>{msg.name}:</strong> {msg.text}
             </div>
           ))}
@@ -289,9 +264,9 @@ function App() {
 
         <div className="inputBox">
           <input
-            placeholder="Type message..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            placeholder="Type message..."
           />
           <button onClick={sendMessage}>Send</button>
         </div>
