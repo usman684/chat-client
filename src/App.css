@@ -11,7 +11,7 @@ body {
   overflow: hidden;
 }
 
-/* CENTER */
+/* CENTER WRAPPER */
 .container {
   height: 100vh;
   display: flex;
@@ -19,7 +19,7 @@ body {
   align-items: center;
 }
 
-/* CARD */
+/* GLASS MORPHISM CARD */
 .card {
   width: 440px;
   max-width: 95%;
@@ -32,12 +32,26 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
-/* HEADER */
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* HEADINGS */
 h2 {
   color: #f1f5f9;
-  font-size: 20px;
+  font-size: 22px;
+  letter-spacing: 0.5px;
 }
 
 p {
@@ -45,24 +59,31 @@ p {
   font-size: 13px;
 }
 
-/* INPUT */
+/* INPUTS (GLASS STYLE) */
 input {
   width: 100%;
   padding: 12px;
-  margin: 6px 0;
+  margin: 7px 0;
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.08);
   background: rgba(255,255,255,0.05);
   color: white;
   outline: none;
+  transition: 0.2s;
 }
 
 input:focus {
   border: 1px solid #00d9a6;
+  box-shadow: 0 0 10px rgba(0, 217, 166, 0.3);
 }
 
-/* BUTTON */
+input::placeholder {
+  color: #64748b;
+}
+
+/* BUTTONS (NEON STYLE) */
 button {
+  width: 100%;
   padding: 12px;
   margin-top: 10px;
   border-radius: 10px;
@@ -71,10 +92,20 @@ button {
   color: white;
   font-weight: bold;
   cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 button:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 217, 166, 0.4);
+}
+
+/* SWITCH TEXT */
+p {
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
 /* TOP BAR */
@@ -85,15 +116,20 @@ button:hover {
   padding: 14px;
   background: rgba(255,255,255,0.04);
   border-bottom: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
 }
 
-/* LEAVE BUTTON */
+/* LEAVE BUTTON (DANGER STYLE) */
 .leaveBtn {
   width: auto;
   padding: 8px 12px;
   background: linear-gradient(135deg, #ef4444, #b91c1c);
   font-size: 12px;
   border-radius: 8px;
+}
+
+.leaveBtn:hover {
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
 }
 
 /* CHAT BOX */
@@ -104,34 +140,52 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  background:
+    radial-gradient(circle at top, rgba(0, 217, 166, 0.05), transparent 40%),
+    radial-gradient(circle at bottom, rgba(37, 99, 235, 0.05), transparent 40%);
 }
 
-/* MESSAGE */
+/* MESSAGE BUBBLES */
 .message {
-  max-width: 75%;
+  max-width: 72%;
   padding: 10px 12px;
   border-radius: 12px;
   font-size: 14px;
   word-wrap: break-word;
+  position: relative;
+  animation: pop 0.2s ease;
 }
 
-/* SELF */
+/* MESSAGE ANIMATION */
+@keyframes pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* SELF MESSAGE (GREEN GLOW) */
 .self {
   align-self: flex-end;
   background: linear-gradient(135deg, #00d9a6, #059669);
-  color: white;
+  color: #fff;
   border-bottom-right-radius: 4px;
+  box-shadow: 0 5px 15px rgba(0, 217, 166, 0.2);
 }
 
-/* OTHER */
+/* OTHER MESSAGE (DARK CARD) */
 .other {
   align-self: flex-start;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
   color: #e2e8f0;
   border-bottom-left-radius: 4px;
 }
 
-/* INPUT BOX */
+/* INPUT AREA */
 .inputBox {
   display: flex;
   gap: 8px;
@@ -146,11 +200,11 @@ button:hover {
 }
 
 .inputBox button {
-  width: 90px;
+  width: 80px;
   margin: 0;
 }
 
-/* SCROLLBAR */
+/* SCROLLBAR BEAUTY */
 .chat-box::-webkit-scrollbar {
   width: 5px;
 }
