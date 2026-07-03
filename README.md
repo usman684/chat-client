@@ -79,19 +79,15 @@ This project demonstrates my ability to build scalable MERN Stack applications w
 
 ### Login Page
 
-<img src="./screenshots/login.png" width="800"/>
+<img src="./screenshot/login.png" width="800"/>
 
 ### Signup Page
 
-<img src="./screenshots/signup.png" width="800"/>
-
-### Chat Screen
-
-<img src="./screenshots/chat.png" width="800"/>
+<img src="./screenshot/signup.png" width="800"/>
 
 ### Two Users Chatting
 
-<img src="./screenshots/two-users-chat.png" width="800"/>
+<img src="./screenshot/two-users-chat.png" width="800"/>
 
 # 📦 Installation
 
@@ -126,10 +122,9 @@ npm run dev
 ```
 chat-client
 │
-├── screenshots
+├── screenshot
 │   ├── login.png
 │   ├── signup.png
-│   ├── chat.png
 │   └── two-users-chat.png
 │
 ├── src
