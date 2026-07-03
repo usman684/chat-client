@@ -1,16 +1,175 @@
-# React + Vite
+![React](https://img.shields.io/badge/React-19-blue?logo=react)
+![Node.js](https://img.shields.io/badge/Node.js-Express-green?logo=node.js)
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-brightgreen?logo=mongodb)
+![Socket.io](https://img.shields.io/badge/Socket.io-Realtime-black?logo=socket.io)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 💬 Real-Time Chat Application
 
-Currently, two official plugins are available:
+A modern real-time chat application built using the MERN Stack and Socket.io. This application allows users to communicate instantly with a clean, responsive, and user-friendly interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live Demo
 
-## React Compiler
+🌐 https://chat-client-kappa-mocha.vercel.app/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📂 GitHub Repository
 
-## Expanding the ESLint configuration
+🔗 https://github.com/usman684/chat-client
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+# 📌 Project Overview
+
+The Real-Time Chat Application is a full-stack messaging platform that enables users to communicate instantly using WebSockets. It provides a fast, secure, and responsive chatting experience built with modern web technologies.
+
+This project demonstrates my ability to build scalable MERN Stack applications with real-time communication.
+
+---
+
+# ✨ Features
+
+- 🔐 User Authentication
+- 💬 Real-Time Messaging using Socket.io
+- 👤 User Login & Registration
+- 📱 Fully Responsive Design
+- ⚡ Instant Message Delivery
+- 🎨 Clean & Modern UI
+- 🌙 Dark Theme
+- 🔄 Auto Scroll to Latest Messages
+- 🚀 Fast Performance
+
+---
+
+# 🛠 Tech Stack
+
+### Frontend
+
+- React.js
+- CSS3
+- Axios
+- React Router DOM
+
+### Backend
+
+- Node.js
+- Express.js
+
+### Database
+
+- MongoDB
+- Mongoose
+
+### Real-Time Communication
+
+- Socket.io
+
+### Authentication
+
+- JWT (JSON Web Token)
+- Bcrypt.js
+
+### Deployment
+
+- Vercel
+- Render / Railway (Backend)
+
+---
+
+## 📷 Screenshots
+
+### 🔐 Login Page
+
+![Login Page](./screenshots/login.png)
+
+### 📝 Signup Page
+
+![Signup Page](./screenshots/signup.png)
+
+### 👥 Two Users Chatting
+
+![Two Users Chatting](./screenshots/two-users-chat.png)
+
+---
+
+# 📦 Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/usman684/chat-client.git
+```
+
+Go to project folder
+
+```bash
+cd chat-client
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run the development server
+
+```bash
+npm run dev
+```
+
+---
+
+# 📁 Folder Structure
+
+```
+chat-client
+│
+├── screenshots
+│   ├── login.png
+│   ├── signup.png
+│   ├── chat.png
+│   └── two-users-chat.png
+│
+├── src
+├── public
+├── package.json
+└── README.md
+```
+
+---
+
+# 🎯 Future Improvements
+
+- ✅ Online Users Indicator
+- ✅ Typing Indicator
+- ✅ Seen Status
+- ✅ Image Sharing
+- ✅ Voice Messages
+- ✅ Video Calling
+- ✅ Emoji Support
+- ✅ Push Notifications
+
+---
+
+# 👨‍💻 Author
+
+**Muhammad Usman**
+
+📧 Email: usman.rauf.953@gmail.com
+
+🌐 Portfolio:
+https://portfoliosite-zeta-sandy.vercel.app/
+
+💻 GitHub:
+https://github.com/usman684
+
+🔗 LinkedIn:
+https://www.linkedin.com/in/muhammad-usman-2041b3396/
+
+---
+
+# ⭐ Support
+
+If you like this project, don't forget to ⭐ star this repository.
+
+It motivates me to build more amazing projects.
