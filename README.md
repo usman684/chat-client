@@ -77,19 +77,21 @@ This project demonstrates my ability to build scalable MERN Stack applications w
 
 ## 📷 Screenshots
 
-### 🔐 Login Page
+### Login Page
 
-![Login Page](./screenshots/login.png)
+<img src="./screenshots/login.png" width="800"/>
 
-### 📝 Signup Page
+### Signup Page
 
-![Signup Page](./screenshots/signup.png)
+<img src="./screenshots/signup.png" width="800"/>
 
-### 👥 Two Users Chatting
+### Chat Screen
 
-![Two Users Chatting](./screenshots/two-users-chat.png)
+<img src="./screenshots/chat.png" width="800"/>
 
----
+### Two Users Chatting
+
+<img src="./screenshots/two-users-chat.png" width="800"/>
 
 # 📦 Installation
 
